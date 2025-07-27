@@ -20,7 +20,7 @@
             <h5 class="accordion-header" id="accordion-heading-1">
               <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
                 data-bs-target="#accordion-filter-1" aria-expanded="true" aria-controls="accordion-filter-1">
-                Product Categories
+                Productos Categorias
                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                   <g aria-hidden="true" stroke="none" fill-rule="evenodd">
                     <path
@@ -100,19 +100,7 @@
                 </svg>
               </button>
             </h5>
-            <div id="accordion-filter-size" class="accordion-collapse collapse show border-0"
-              aria-labelledby="accordion-heading-size" data-bs-parent="#size-filters">
-              <div class="accordion-body px-0 pb-0">
-                <div class="d-flex flex-wrap">
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">XS</a>
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">S</a>
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">M</a>
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">L</a>
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">XL</a>
-                  <a href="#" class="swatch-size btn btn-sm btn-outline-light mb-3 me-3 js-filter">XXL</a>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
 
@@ -271,7 +259,6 @@
 
         <div class="d-flex justify-content-between mb-4 pb-md-2">
           <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-            <a href="{{route('home.index')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">Inicio</a>
             <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
             <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">La Tienda</a>
           </div>
@@ -323,12 +310,12 @@
                 <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <a href="{{route('shop.product.details', ['product_slug'=>$product->slug])}}"><img loading="lazy" src="{{asset('uploads/products')}}/{{$product->image}}" width="330"
+                      <a href="{{route('shop.index', ['product_slug'=>$product->slug])}}"><img loading="lazy" src="{{asset('uploads/products')}}/{{$product->image}}" width="330"
                         height="400" alt="{{$product->name}}" class="pc__img"></a>
                       </div>
                       <div class="swiper-slide">
                         @foreach(explode(",", $product->images) as $gimg)
-                      <a href="{{route('shop.product.details', ['product_slug'=>$product->slug])}}"><img loading="lazy" src="{{asset('uploads/products')}}/{{$gimg}}"
+                      <a href="{{route('shop.index', ['product_slug'=>$product->slug])}}"><img loading="lazy" src="{{asset('uploads/products')}}/{{$gimg}}"
                           width="330" height="400" alt="{{$product->name}}" class="pc__img"></a>
                           @endforeach
                     </div>
@@ -343,9 +330,9 @@
                     </svg></span>
                   </div>
                   @if(Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
-            <a href="{{route('cart.index')}}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn btn-warning mb-3">Ir al carrito</a>
+            <a href="{{route('shop.index')}}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn btn-warning mb-3">Ir al carrito</a>
             @else
-            <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
+            <form name="addtocart-form" method="post" action="{{route('shop.index')}}">
             @csrf
             <input type="hidden" name="id" value="{{$product->id}}">
                         <input type="hidden" name="quantity" value="1">
@@ -361,7 +348,7 @@
 
               <div class="pc__info position-relative">
                 <p class="pc__category">{{$product->category->name}}</p>
-                <h6 class="pc__title"><a href="{{route('shop.product.details', ['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
+                <h6 class="pc__title"><a href="{{route('shop.index', ['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
                 <div class="product-card__price d-flex">
                   <span class="money price">
                     @if($product->sale_price)
@@ -393,7 +380,7 @@
                 </div>
 
           @if(Cart::instance("wishlist")->content()->Where('id',$product->id)->count()>0)
-             <form method="POST" action="{{route('wishlist.item.remove', ['rowId'=>Cart::instance("wishlist")->content()->Where('id',$product->id)->first()->rowId])}}">
+             <form method="POST" action="{{route('shop.index', ['rowId'=>Cart::instance("wishlist")->content()->Where('id',$product->id)->first()->rowId])}}">
               @csrf
               @method('DELETE')
               <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 filled-heart" title="Remove from Wishlist">
@@ -403,7 +390,7 @@
                 </button>
               </form>
           @else
-          <form method="POST" action="{{route('wishlist.add')}}">
+          <form method="POST" action="{{route('shop.index')}}">
             @csrf
           <input type="hidden" name="id" value="{{$product->id}}" />
           <input type="hidden" name="name" value="{{$product->name}}" />

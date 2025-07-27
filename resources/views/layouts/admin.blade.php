@@ -122,7 +122,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.orders')}}" class="">
+                                            <a href="{{route('admin.index')}}" class="">
                                                 <div class="text">Orders</div>
                                             </a>
                                         </li>
@@ -360,47 +360,7 @@
     <script src="{{asset('js/bootstrap-select.min.js')}}"></script>   
     <script src="{{asset('js/sweetalert.min.js')}}"></script>    
     <script src="{{asset('js/apexcharts/apexcharts.js')}}"></script>
-    <script>
-    $(function(){
-      $('#search-input').on('keyup', function(){
-        var searchQuery = $(this).val();
-        if(searchQuery.length > 2){
-          $.ajax({
-            type: 'GET',
-            url: "{{route('admin.search')}}",
-            data: { query: searchQuery },
-            dataType: "json",
-            success: function(data){
-              $('#box-content-search').html('');
-              $.each(data, function(index, item){
-                var url = "{{route('admin.product.edit', ['id'=>'product_id'])}}";
-                var  link = url.replace('product_id', item.id);
-
-                $('#box-content-search').append(`
-                  <li>
-                      <ul>
-                          <li class='product-item gap14 mb-10'>
-                              <div class='image no-bg'>
-                                <img src='{{asset('uploads/products/thumbnails')}}/${item.image}' alt='${item.name}'>
-                              </div>
-                              <div class='flex items-center justify-between gap20 flex-grow'>
-                                <div class='name'>
-                                  <a href='${link}' class='body-text'>${item.name}</a>
-                                </div>
-                              </div>
-                          </li>
-                          <li class="mb-10">
-                              <div class = "divider"></div>
-                          </li>
-                      </ul>
-                    </li>`);
-              })
-            }
-          })
-        }
-      });
-    });
-  </script>
+   
     <script src="{{asset('js/main.js')}}"></script>
     <script>
         (function ($) {
