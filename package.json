@@ -3,9 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "npm ci --no-optional && npm run build-real",
-        "build-real": "tu-comando-de-build-original"
+        "build": "vite build",
+        "dev": "vite"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
