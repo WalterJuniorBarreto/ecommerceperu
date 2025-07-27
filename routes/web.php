@@ -13,49 +13,43 @@ use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/tienda', [ShopController::class, 'index'])->name('shop.index');
-Route::get('/tienda/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
-/*Route::get('/carrito/clear', function () {
-    Cart::instance('cart')->destroy(); // 🔥 Esto limpia la sesión del carrito
-    return redirect('/cart')->with('success', 'Carrito vaciado correctamente.');
-});*/
+Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 
 
 
 
 
-Route::get('/carrito', [CartController::class, 'index'])->name('cart.index');
-Route::post('/carrito/agregar', [CartController::class, 'add_to_cart'])->name('cart.add');
-Route::put('/carrito/aumentar-cantidad/{rowId}',[CartController::class,'increase_item_quantity'])->name('cart.increase.qty');
-Route::put('/carrito/disminuir-cantidad/{rowId}',[CartController::class,'reduce_item_quantity'])->name('cart.reduce.qty');
-Route::delete('/carrito/remover/{rowId}',[CartController::class,'remove_item_from_cart'])->name('cart.remove');
-Route::delete('/carrito/eliminar',[CartController::class,'empty_cart'])->name('cart.empty');
+#Route::get('/carrito', [CartController::class, 'index'])->name('cart.index');
+#Route::post('/carrito/agregar', [CartController::class, 'add_to_cart'])->name('cart.add');
+##Route::put('/carrito/aumentar-cantidad/{rowId}',[CartController::class,'increase_item_quantity'])->name('cart.increase.qty');
+#Route::put('/carrito/disminuir-cantidad/{rowId}',[CartController::class,'reduce_item_quantity'])->name('cart.reduce.qty');
+#Route::delete('/carrito/remover/{rowId}',[CartController::class,'remove_item_from_cart'])->name('cart.remove');
+#Route::delete('/carrito/eliminar',[CartController::class,'empty_cart'])->name('cart.empty');
 
-Route::post('/lista-deseos/agregar',[WishlistController::class,'add_to_wishlist'])->name('wishlist.add');
-Route::get('/lista-deseos', [WishlistController::class, 'index'])->name('wishlist.index');
-Route::delete('/lista-deseos/remover/item/{rowId}',[WishlistController::class,'remove_item'])->name('wishlist.item.remove');
-Route::delete('/lista-deseos/eliminar',[WishlistController::class,'empty_wishlist'])->name('wishlist.items.clear');
-Route::post('/lista-deseos/mover-del-carrito/{rowId}',[WishlistController::class,'move_to_cart'])->name('wishlist.move.to.cart');
-
-
-Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
-
-Route::post('/realizar-orden',[CartController::class,'place_order'])->name('cart.place.order');
-Route::get('/orden-confirmacion',[CartController::class,'order_confirmation'])->name('order.confirmation');
-
-Route::get('/contactanos', [HomeController::class, 'contact'])->name('home.contact');
-Route::get('/nosotros', [HomeController::class, 'nosotros'])->name('home.nosotros');
-Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
-
-Route::get('/buscar', [HomeController::class, 'search'])->name('home.search');
+#Route::post('/lista-deseos/agregar',[WishlistController::class,'add_to_wishlist'])->name('wishlist.add');
+#Route::get('/lista-deseos', [WishlistController::class, 'index'])->name('wishlist.index');
+#Route::delete('/lista-deseos/remover/item/{rowId}',[WishlistController::class,'remove_item'])->name('wishlist.item.remove');
+#Route::delete('/lista-deseos/eliminar',[WishlistController::class,'empty_wishlist'])->name('wishlist.items.clear');
+#Route::post('/lista-deseos/mover-del-carrito/{rowId}',[WishlistController::class,'move_to_cart'])->name('wishlist.move.to.cart');
 
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/cuenta-dashboard', [UserController::class, 'index'])->name('user.index');
-    Route::get('/cuenta-ordenes',[UserController::class,'account_orders'])->name('user.account.orders');
-    Route::get('/cuenta-ordenes/{order_id}/detalles',[UserController::class,'account_order_details'])->name('user.account.order.details');
-});
+#Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
+
+#Route::post('/realizar-orden',[CartController::class,'place_order'])->name('cart.place.order');
+#Route::get('/orden-confirmacion',[CartController::class,'order_confirmation'])->name('order.confirmation');
+
+#Route::get('/contactanos', [HomeController::class, 'contact'])->name('home.contact');
+#Route::get('/nosotros', [HomeController::class, 'nosotros'])->name('home.nosotros');
+#Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
+
+#Route::get('/buscar', [HomeController::class, 'search'])->name('home.search');
+
+
+#Route::middleware(['auth'])->group(function(){
+#    Route::get('/cuenta-dashboard', [UserController::class, 'index'])->name('user.index');
+ #   Route::get('/cuenta-ordenes',[UserController::class,'account_orders'])->name('user.account.orders');
+  #  Route::get('/cuenta-ordenes/{order_id}/detalles',[UserController::class,'account_order_details'])->name('user.account.order.details');
+#});
 Route::middleware(['auth', AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/brands', [AdminController::class, 'brands'])->name('admin.brands');
